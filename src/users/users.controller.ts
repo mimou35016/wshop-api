@@ -10,14 +10,21 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { UserResponseDto } from './dto/respone-user.dto';
 
+@ApiTags('users')
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
+  @ApiBearerAuth('JWT-auth')
   @ApiOperation({
     summary: 'Create a new user',
     description:
@@ -38,6 +45,7 @@ export class UsersController {
   }
 
   @Get()
+  @ApiBearerAuth('JWT-auth')
   @ApiOperation({
     summary: 'Get all users',
     description: 'Retrieve list of all users. Requires admin or manager role.',
@@ -56,6 +64,7 @@ export class UsersController {
   }
 
   @Get(':id')
+  @ApiBearerAuth('JWT-auth')
   @ApiOperation({
     summary: 'Get user by ID',
     description:
@@ -76,6 +85,7 @@ export class UsersController {
   }
 
   @Patch(':id')
+  @ApiBearerAuth('JWT-auth')
   @ApiOperation({
     summary: 'Update user',
     description:
@@ -96,6 +106,7 @@ export class UsersController {
   }
 
   @Delete(':id')
+  @ApiBearerAuth('JWT-auth')
   @ApiOperation({
     summary: 'Delete user',
     description:

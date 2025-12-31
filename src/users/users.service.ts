@@ -25,6 +25,7 @@ export class UsersService {
       ...createUserDto,
       password: hashedPassword,
     });
+
     return createdUser.save();
   }
 
